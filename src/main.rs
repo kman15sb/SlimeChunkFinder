@@ -4,7 +4,7 @@ use slime_seed_finder::chunk::Chunk;
 use std::time::Instant;
 
 mod constants {
-    pub const GRID_CHECK_SIZE: i32 = 2;
+    pub const GRID_CHECK_SIZE: i32 = 3;
     pub const SEED: u64 = 611464175010909465;
     pub const MAX_SEARCH: i32 = 1000000;
 }
@@ -20,7 +20,7 @@ pub fn main() {
         }
     }
     let duration = start.elapsed();
-    println!("Code ran in {:?} and found {} matches", duration, count);
+    println!("Checked {} chunks in {:?} and found {} matches", constants::MAX_SEARCH, duration, count);
 }
 
 fn check_square(pos: Vec<i32>) -> bool {
@@ -33,5 +33,5 @@ fn check_square(pos: Vec<i32>) -> bool {
             }
         }
     }
-    return count < 1
+    return count < 1;
 }
