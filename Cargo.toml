@@ -1,8 +1,8 @@
 [package]
 name = "slime_seed_finder"
 version = "0.1.0"
-authors = ["Badel2 <2badel2@gmail.com>"]
-edition = "2018"
+authors = ["Kman15SB"]
+edition = "2021"
 [package.metadata]
 # Disable wasm-opt because it not works with cargo wasi
 # https://github.com/bytecodealliance/cargo-wasi/issues/49
@@ -15,22 +15,6 @@ name = "slime_seed_finder"
 lto = true
 
 [dependencies]
-anvil-region = { git = "https://github.com/Badel2/anvil-region", rev = "dc6c43dea3187083caadb83d603cfb03df75599a", features = ["zip"] }
-named-binary-tag = "0.6.0"
-spiral = "0.1.9"
-num_cpus = { version = "1.13.0", optional = true }
-structopt = { version = "0.3.22", optional = true }
-image = { version = "0.23.14", optional = true }
-log = { version = "0.4.14", features = ["std"] }
-serde = { version = "1.0.126", features = ["derive"] }
-serde_json = { version = "1.0.64", optional = false }
-ndarray = "0.15.3"
-rand = { version = "0.8.4", optional = true }
-pretty_env_logger = "0.4.0"
-sha2 = "0.9.5"
-zip = { version = "0.5.13", default-features = false, features = ["deflate"] }
-fastanvil = "0.21.0"
-fastnbt = "1.1.0"
 
 [[bin]]
 name = "slime_seed_finder"
