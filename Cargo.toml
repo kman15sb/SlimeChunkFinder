@@ -15,6 +15,7 @@ name = "slime_seed_finder"
 lto = true
 
 [dependencies]
+indicatif = "0.16.2"
 
 [[bin]]
 name = "slime_seed_finder"
