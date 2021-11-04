@@ -5,15 +5,15 @@ use std::time::Instant;
 use slime_seed_finder::chunk::Chunk;
 
 mod constants {
-    pub const GRID_CHECK_SIZE: i32 = 3;
+    pub const GRID_CHECK_SIZE: i32 = 2;
     pub const SEED: u64 = 611464175010909465;
-    pub const MAX_SEARCH: i32 = 1000000000;
-    pub const MAX_NONSLIME_TILES: i32 = 1;
+    pub const MAX_SEARCH: i64 = 1000000;
+    pub const MAX_NONSLIME_TILES: i32 = 0;
 }
 
 pub fn main() {
     let now = Instant::now();
-    let mut chunks: Vec<Vec<i32>> = Vec::new();
+    let mut chunks: Vec<Vec<i64>> = Vec::new();
 
     // let bar = indicatif::ProgressBar::new(constants::MAX_SEARCH.try_into().unwrap());
     // bar.set_style(
@@ -44,15 +44,15 @@ pub fn main() {
     println!("finished in {:?} seconds", elapsed);
 }
 
-fn check_square(pos: Vec<i32>) -> bool {
+fn check_square(pos: Vec<i64>) -> bool {
     let mut count: i32 = 0;
     'outer: for j in 0..constants::GRID_CHECK_SIZE {
         for k in 0..constants::GRID_CHECK_SIZE {
             if slime::is_slime_chunk(
                 constants::SEED,
                 &Chunk {
-                    x: (pos[0] - j) as i32,
-                    z: (pos[1] - k) as i32,
+                    x: (pos[0] - j as i64),
+                    z: (pos[1] - k as i64),
                 },
             ) == false
             {
@@ -66,15 +66,15 @@ fn check_square(pos: Vec<i32>) -> bool {
     return count <= constants::MAX_NONSLIME_TILES;
 }
 
-pub fn viz_chunks(pos: &Vec<i32>) {
+pub fn viz_chunks(pos: &Vec<i64>) {
     for i in 0..constants::GRID_CHECK_SIZE {
         let mut print_grid = String::from("");
         for j in 0..constants::GRID_CHECK_SIZE {
             if slime::is_slime_chunk(
                 constants::SEED,
                 &Chunk {
-                    x: (pos[0] - i) as i32,
-                    z: (pos[1] - j) as i32,
+                    x: (pos[0] - i as i64),
+                    z: (pos[1] - j as i64),
                 },
             ) == true
             {

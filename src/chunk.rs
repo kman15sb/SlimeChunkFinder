@@ -3,12 +3,12 @@ use std::fmt;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Chunk {
-    pub x: i32,
-    pub z: i32,
+    pub x: i64,
+    pub z: i64,
 }
 
 impl Chunk {
-    pub fn new(x: i32, z: i32) -> Chunk {
+    pub fn new(x: i64, z: i64) -> Chunk {
         Chunk { x, z }
     }
     /// Panics if the chunk coordinates do not fit in i32
@@ -17,8 +17,8 @@ impl Chunk {
         // (x - 15) / 16 is not correct because it rounds x=16 to 0 instead of 1
         // Euclidian division by 16 would be correct, but we just use a simple bit shift
         Chunk {
-            x: i32::try_from(x >> 4).unwrap(),
-            z: i32::try_from(z >> 4).unwrap(),
+            x: i64::try_from(x >> 4).unwrap(),
+            z: i64::try_from(z >> 4).unwrap(),
         }
     }
 }
