@@ -1,9 +1,9 @@
 
-pub fn next_spiral(n: i32) -> Vec<i32> {    
+pub fn next_spiral(n: i64) -> Vec<i32> {    
     let r: i32 = ((((n+1) as f64).sqrt() - 1.0) / 2.0).floor() as i32 + 1;
     let p: i32 = (8 * (r as i32) * ((r as i32) - 1)) / 2;
     let en: i32 = (r as i32) * 2;
-    let a: i32 = (1 + n + p) % ((r as i32) * 8);
+    let a: i32 = (1 + n + (p as i64)) as i32 % ((r as i32) * 8);
     
     let mut pos: Vec<i32> = ([0, 0]).to_vec();
     match a as i64 / (r * 2) as i64{
