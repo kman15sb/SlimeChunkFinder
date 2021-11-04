@@ -1,27 +1,29 @@
 mod slime;
 mod spiral;
-use indicatif;
+// use indicatif;
+use std::time::Instant;
 use slime_seed_finder::chunk::Chunk;
 
 mod constants {
-    pub const GRID_CHECK_SIZE: i32 = 2;
+    pub const GRID_CHECK_SIZE: i32 = 3;
     pub const SEED: u64 = 611464175010909465;
-    pub const MAX_SEARCH: i32 = 100000;
-    pub const MAX_NONSLIME_TILES: i32 = 0;
+    pub const MAX_SEARCH: i32 = 1000000000;
+    pub const MAX_NONSLIME_TILES: i32 = 1;
 }
 
 pub fn main() {
+    let now = Instant::now();
     let mut chunks: Vec<Vec<i32>> = Vec::new();
 
-    let bar = indicatif::ProgressBar::new(constants::MAX_SEARCH.try_into().unwrap());
-    bar.set_style(
-        indicatif::ProgressStyle::default_bar()
-            .template("[{elapsed_precise}] {bar:40.green} {pos:>7}/{len:7} {msg}")
-            .progress_chars("xx-"),
-    );
+    // let bar = indicatif::ProgressBar::new(constants::MAX_SEARCH.try_into().unwrap());
+    // bar.set_style(
+    //     indicatif::ProgressStyle::default_bar()
+    //         .template("[{elapsed_precise}] {bar:40.green} {pos:>7}/{len:7} {msg}")
+    //         .progress_chars("xx-"),
+    // );
 
     for i in 1..constants::MAX_SEARCH {
-        bar.inc(1);
+        // bar.inc(1);
 
         let pos = &spiral::next_spiral(i);
         if check_square(pos.to_vec()) == true {
@@ -38,7 +40,8 @@ pub fn main() {
         );
         viz_chunks(&chunks[i]);
     }
-    println!("done!");
+    let elapsed = now.elapsed();
+    println!("finished in {:?} seconds", elapsed);
 }
 
 fn check_square(pos: Vec<i32>) -> bool {
